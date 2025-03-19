@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.collections.FXCollections?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.gestion_presence.gestion_presence.EmargementController">
+
+
+    <VBox prefHeight="587.0" prefWidth="952" spacing="20" style="-fx-padding: 20;">
+        <children>
+         <BorderPane prefHeight="73.0" prefWidth="912.0">
+            <left>
+                   <Button fx:id="btnExportPDF" onAction="#handleExportPDF" style="-fx-background-color: blue; -fx-text-fill: white;" text="Exporter en PDF" BorderPane.alignment="CENTER" />
+            </left>
+            <right>
+      
+                    <Button fx:id="btnExportExcel" onAction="#handleExportExcel" style="-fx-background-color: orange; -fx-text-fill: white;" text="Exporter en Excel" BorderPane.alignment="CENTER" />
+            </right>
+         </BorderPane>
+
+            <Label style="-fx-font-size: 20px; -fx-font-weight: bold;" text="Liste des Émargements" />
+
+
+            <TableView fx:id="tableEmargements">
+                <columns>
+                    <TableColumn fx:id="colId" prefWidth="50" text="ID" />
+                    <TableColumn fx:id="colDate" prefWidth="150" text="Date" />
+                    <TableColumn fx:id="colStatut" prefWidth="100" text="Statut" />
+                    <TableColumn fx:id="colProfesseur" prefWidth="200" text="Professeur" />
+                    <TableColumn fx:id="colCours" prefWidth="200" text="Cours" />
+                </columns>
+            </TableView>
+
+
+            <HBox spacing="10">
+                <DatePicker fx:id="datePicker" promptText="Date de l'émargement" />
+                <ComboBox fx:id="comboStatut" promptText="Statut">
+                    <items>
+                        <FXCollections fx:factory="observableArrayList">
+                            <String fx:value="Présent" />
+                            <String fx:value="Absent" />
+                        </FXCollections>
+                    </items>
+                </ComboBox>
+                <ComboBox fx:id="comboProfesseur" prefWidth="200" promptText="Sélectionner Professeur" />
+                <ComboBox fx:id="comboCours" prefWidth="200" promptText="Sélectionner Cours" />
+
+                <Button fx:id="btnAjouter" onAction="#addEmarge" style="-fx-background-color: green; -fx-text-fill: white;" text="Ajouter" />
+                <Button fx:id="btnModifier" onAction="#modifEmarge" style="-fx-background-color: orange; -fx-text-fill: white;" text="Modifier" />
+                <Button fx:id="btnSupprimer" onAction="#deleteEmarge" style="-fx-background-color: red; -fx-text-fill: white;" text="Supprimer" />
+
+
+            </HBox>
+        </children>
+    </VBox>
+
+</AnchorPane>

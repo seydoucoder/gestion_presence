@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Spinner?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane prefHeight="573.0" prefWidth="991.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.gestion_presence.gestion_presence.CoursController">
+
+    <VBox prefHeight="524.0" prefWidth="1011.0" spacing="20" style="-fx-padding: 20;">
+        <children>
+            <Label style="-fx-font-size: 20px; -fx-font-weight: bold;" text="Liste des Cours" />
+
+            <TableView fx:id="tableCours">
+                <columns>
+                    <TableColumn fx:id="colId" prefWidth="50" text="ID" />
+                    <TableColumn fx:id="colNom" prefWidth="150.0" text="Nom du Cours" />
+                    <TableColumn fx:id="colDescription" prefWidth="209.0" text="Description" />
+                    <TableColumn fx:id="colHeureDebut" prefWidth="124.0" text="Heure Début" />
+                    <TableColumn fx:id="colHeureFin" prefWidth="112.0" text="Heure Fin" />
+                    <TableColumn fx:id="colSalle" prefWidth="76.0" text="Salle" />
+                    <TableColumn fx:id="colJour" prefWidth="79.0" text="Jour" />
+               <TableColumn fx:id="colProf" prefWidth="170.0" text="Professeur" />
+                </columns>
+            </TableView>
+
+            <HBox spacing="10">
+                <TextField fx:id="txtNom" prefWidth="150" promptText="Nom du cours" />
+                <TextField fx:id="txtDescription" prefWidth="200" promptText="Description" />
+                <ComboBox fx:id="comboProfesseur" prefWidth="200" promptText="Sélectionner Professeur" />
+                <ComboBox fx:id="cmbHeureDebut" prefWidth="120" promptText="Heure Début" />
+                <ComboBox fx:id="cmbHeureFin" prefWidth="120" promptText="Heure Fin" />
+                <ComboBox fx:id="cmbSalle" prefWidth="150" promptText="Salle" />
+                <ComboBox fx:id="cmbJour" prefWidth="120" promptText="Jour" />
+            </HBox>
+        </children>
+    </VBox>
+
+       <Button fx:id="btnAjouter" layoutX="394.0" layoutY="524.0" onAction="#addCours" style="-fx-background-color: green; -fx-text-fill: white;" text="Ajouter" />
+       <Button fx:id="btnModifier" layoutX="481.0" layoutY="524.0" onAction="#modifCours" style="-fx-background-color: orange; -fx-text-fill: white;" text="Modifier" />
+       <Button fx:id="btnSupprimer" layoutX="576.0" layoutY="524.0" onAction="#deleteCours" style="-fx-background-color: red; -fx-text-fill: white;" text="Supprimer" />
+   <Spinner layoutX="748.0" layoutY="524.0" />
+
+</AnchorPane>

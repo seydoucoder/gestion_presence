@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="com.gestion_presence.gestion_presence.ProfesseurController">
+
+    <!-- Contenu principal -->
+    <VBox spacing="20" style="-fx-padding: 20;">
+
+        <!-- Titre -->
+        <Label text="Gestion des Présences" style="-fx-font-size: 20px; -fx-font-weight: bold;" AnchorPane.leftAnchor="20" AnchorPane.topAnchor="20"/>
+
+        <!-- Tableau des cours -->
+        <TableView fx:id="tableCours" AnchorPane.leftAnchor="20" AnchorPane.topAnchor="60" AnchorPane.rightAnchor="20" AnchorPane.bottomAnchor="100">
+            <columns>
+                <TableColumn fx:id="colNomCours" text="Nom du Cours" />
+                <TableColumn fx:id="colHeureDebut" text="Heure Début" />
+                <TableColumn fx:id="colHeureFin" text="Heure Fin" />
+                <TableColumn fx:id="colJour" text="Jour" />
+            </columns>
+        </TableView>
+
+        <!-- Bouton de marquage de présence -->
+        <Button text="Marquer Présence" fx:id="btnEmarger" style="-fx-background-color: #28a745; -fx-text-fill: white;" AnchorPane.leftAnchor="20" AnchorPane.bottomAnchor="20" AnchorPane.rightAnchor="20" />
+
+    </VBox>
+
+</AnchorPane>
