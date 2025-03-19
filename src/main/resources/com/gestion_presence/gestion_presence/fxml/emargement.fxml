@@ -29,6 +29,11 @@
          </BorderPane>
 
             <Label style="-fx-font-size: 20px; -fx-font-weight: bold;" text="Liste des Émargements" />
+            <HBox spacing="10">
+                <DatePicker fx:id="datePickerDebut" promptText="Date de début" />
+                <DatePicker fx:id="datePickerFin" promptText="Date de fin" />
+                <Button fx:id="btnFiltrerDates" onAction="#handleFiltrerParDate" text="Filtrer par date" />
+            </HBox>
 
 
             <TableView fx:id="tableEmargements">

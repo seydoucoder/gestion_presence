@@ -20,8 +20,10 @@ import javafx.stage.Stage;
 
 import java.io.File;
 import java.net.URL;
+import java.sql.Date;
 import java.time.LocalDate;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -46,60 +48,74 @@ public class EmargementController implements Initializable {
     private Button btnExportPDF;
     @FXML
     private Button btnExportExcel;
+    @FXML
+    private DatePicker datePickerDebut;
+    @FXML
+    private Button btnFiltrerDates;
+    @FXML
+    private DatePicker datePickerFin;
+    @FXML
+    private void handleFiltrerParDate(ActionEvent event) {
+        LocalDate dateDebut = datePickerDebut.getValue();
+        LocalDate dateFin = datePickerFin.getValue();
+
+        if (dateDebut != null && dateFin != null) {
+            // Convertir LocalDate en Date (java.util.Date)
+            Date dateDebutJava = java.sql.Date.valueOf(dateDebut);
+            Date dateFinJava = java.sql.Date.valueOf(dateFin);
+
+            // Récupérer les émargements filtrés
+            List<Emargements> emargementsFiltrés = emargementsDao.getEmargementsBetweenDates(dateDebutJava, dateFinJava);
+
+            // Mettre à jour la TableView avec les résultats filtrés
+            tableEmargements.getItems().setAll(emargementsFiltrés);
+        }
+    }
 
     UserDao userDao = new UserDao();
     CoursDao coursDao = new CoursDao();
     EmargementsDao emargementsDao = new EmargementsDao();
     private ExportService exportService = new ExportService();
 
-//    public void handleExportPDF() {
-//        // Récupérer les émargements de la base de données
-//        List<Emargements> emargements = emargementsDao.getAllEmargements();
-//
-//        // Définir le chemin du fichier
-//        String filePath = "export_emargements.pdf";
-//
-//        // Exportation en PDF
-//        exportService.exportToPDF(emargements, filePath);
-//    }
     @FXML
     void handleExportPDF(ActionEvent event) {
-        // Ouvrir une boîte de dialogue pour choisir l'emplacement du fichier
-        FileChooser fileChooser = new FileChooser();
-        fileChooser.setTitle("Enregistrer le fichier PDF");
-        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Fichiers PDF", "*.pdf"));
 
-        // Obtenir la fenêtre actuelle
-        Stage stage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
-        File file = fileChooser.showSaveDialog(stage);
+        List<Emargements> emargements = new ArrayList<>(tableEmargements.getItems());
 
-        if (file != null) {
-            // Récupérer les émargements depuis la base de données
-            List<Emargements> emargements = emargementsDao.getAllEmargements();
 
-            // Appeler le service d'exportation
-            exportService.exportToPDF(emargements, file.getAbsolutePath());
+        if (emargements.isEmpty()) {
+            System.out.println("Aucune donnée à exporter.");
+            return;
         }
+
+        String filePath = "export_emargements.pdf";
+
+
+        exportService.exportToPDF(emargements, filePath);
+
+        System.out.println("Exportation PDF réussie !");
     }
+
+
     @FXML
     void handleExportExcel(ActionEvent event) {
-        // Ouvrir une boîte de dialogue pour choisir l'emplacement du fichier
-        FileChooser fileChooser = new FileChooser();
-        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Fichiers Excel", "*.xlsx"));
-        fileChooser.setTitle("Enregistrer le fichier Excel");
 
-        // Obtenir la fenêtre actuelle
-        Stage stage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
-        File file = fileChooser.showSaveDialog(stage);
+        List<Emargements> emargements = new ArrayList<>(tableEmargements.getItems());
 
-        if (file != null) {
-            // Récupérer les émargements depuis la base de données
-            List<Emargements> emargements = emargementsDao.getAllEmargements();
 
-            // Appeler le service d'exportation en Excel
-            exportService.exportToExcel(emargements, file.getAbsolutePath());
+        if (emargements.isEmpty()) {
+            System.out.println("Aucune donnée à exporter.");
+            return;
         }
+
+        String filePath = "export_emargements.xlsx";
+
+
+        exportService.exportToExcel(emargements, filePath);
+
+        System.out.println("Exportation Excel réussie !");
     }
+
 
     private void chargerProfs() {
         List<User> profs = userDao.getUsersByProfs();
@@ -160,8 +176,15 @@ public class EmargementController implements Initializable {
 
     }
 
+
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+
+
+
+
+        btnFiltrerDates.setOnAction(event -> handleFiltrerParDate(event));
         if (btnExportPDF != null) {
             btnExportPDF.setOnAction(this::handleExportPDF);
         }
