@@ -45,7 +45,7 @@ public class LoginController implements Initializable {
 
                 System.out.println("Utilisateur connecté : " + user.getEmail() + " - Rôle : " + user.getRole().getClass());
 
-                // Rediriger vers la page principale
+
                 redirigerApresConnexion();
             } else {
                 showError("Erreur de connexion", "Email ou mot de passe incorrect.");

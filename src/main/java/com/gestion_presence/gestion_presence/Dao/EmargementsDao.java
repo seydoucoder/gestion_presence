@@ -9,7 +9,10 @@ import jakarta.persistence.EntityTransaction;
 import jakarta.persistence.TypedQuery;
 
 import java.sql.Date;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 public class EmargementsDao {
 
@@ -107,6 +110,56 @@ public class EmargementsDao {
             em.close();
         }
     }
+
+    //Graph
+    public Map<String, Long> getEmargementsCountByProfesseur() {
+        EntityManager em = JPAUtil.getEntityManagerFactory().createEntityManager();
+        try {
+            String query = "SELECT e.professeur.nom, COUNT(e) FROM Emargements e GROUP BY e.professeur.nom";
+            List<Object[]> results = em.createQuery(query, Object[].class).getResultList();
+
+            Map<String, Long> stats = new HashMap<>();
+            for (Object[] result : results) {
+                stats.put((String) result[0], (Long) result[1]);
+            }
+            return stats;
+        } finally {
+            em.close();
+        }
+    }
+    public Map<String, Long> getEmargementsEvolution() {
+        EntityManager em = JPAUtil.getEntityManagerFactory().createEntityManager();
+        try {
+            String query = "SELECT TO_CHAR(e.date, 'YYYY-MM') AS mois, COUNT(e) FROM Emargements e GROUP BY mois ORDER BY mois ASC";
+            List<Object[]> results = em.createQuery(query, Object[].class).getResultList();
+
+            Map<String, Long> evolutionStats = new LinkedHashMap<>();
+            for (Object[] result : results) {
+                evolutionStats.put((String) result[0], (Long) result[1]);
+            }
+            return evolutionStats;
+        } finally {
+            em.close();
+        }
+    }
+
+    public Map<String, Double> getPresenceParCours() {
+        EntityManager em = JPAUtil.getEntityManagerFactory().createEntityManager();
+        try {
+            String query = "SELECT e.cours.nom, COUNT(e) * 100.0 / (SELECT COUNT(e2) FROM Emargements e2) FROM Emargements e GROUP BY e.cours.nom";
+            List<Object[]> results = em.createQuery(query, Object[].class).getResultList();
+
+            Map<String, Double> presenceParCours = new HashMap<>();
+            for (Object[] result : results) {
+                presenceParCours.put((String) result[0], (Double) result[1]);
+            }
+            return presenceParCours;
+        } finally {
+            em.close();
+        }
+    }
+
+
 
 
 }

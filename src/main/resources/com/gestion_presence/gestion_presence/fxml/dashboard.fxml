@@ -1,12 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.text.Font?>
+<?import javafx.scene.chart.BarChart?>
+<?import javafx.scene.chart.LineChart?>
+<?import javafx.scene.chart.PieChart?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.NumberAxis?>
 <?import javafx.scene.control.Label?>
 
-<AnchorPane xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.gestion_presence.gestion_presence.DashboardController" prefWidth="800.0" prefHeight="600.0">
+<AnchorPane xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.gestion_presence.gestion_presence.DashboardController" prefWidth="1000.0" prefHeight="600.0">
 
 
-    <Label text="Tableau de Bord" layoutX="250.0" layoutY="250.0" style="-fx-font-size: 24px; -fx-font-weight: bold;"/>
+    <Label text="Tableau de Bord" layoutX="400.0" layoutY="20.0" style="-fx-font-size: 24px; -fx-font-weight: bold;"/>
+
+
+    <BarChart fx:id="barChartProfesseurs" layoutX="50.0" layoutY="70.0" prefWidth="400.0" prefHeight="300.0">
+        <xAxis>
+            <CategoryAxis fx:id="xAxisProf" label="Professeurs"/>
+        </xAxis>
+        <yAxis>
+            <NumberAxis fx:id="yAxisEmargements" label="Nombre d’émargements"/>
+        </yAxis>
+    </BarChart>
+
+
+    <LineChart fx:id="lineChartEmargements" layoutX="500.0" layoutY="70.0" prefWidth="450.0" prefHeight="300.0">
+        <xAxis>
+            <CategoryAxis fx:id="xAxisDate" label="Période"/>
+        </xAxis>
+        <yAxis>
+            <NumberAxis fx:id="yAxisCount" label="Présences"/>
+        </yAxis>
+    </LineChart>
+
+
+    <PieChart fx:id="pieChartCours" layoutX="300.0" layoutY="380.0" prefWidth="400.0" prefHeight="200.0"/>
 
 </AnchorPane>
