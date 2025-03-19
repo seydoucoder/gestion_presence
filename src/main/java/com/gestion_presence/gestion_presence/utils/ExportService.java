@@ -60,7 +60,7 @@ public class ExportService {
 
 
             document.close();
-            System.out.println("PDF exporté avec succès : " + filePath);
+
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -98,7 +98,7 @@ public class ExportService {
             workbook.write();
             workbook.close();
 
-            System.out.println("Excel exporté avec succès : " + filePath);
+
         } catch (IOException | WriteException e) {
             e.printStackTrace();
             System.err.println("Erreur lors de l'exportation d'Excel.");
