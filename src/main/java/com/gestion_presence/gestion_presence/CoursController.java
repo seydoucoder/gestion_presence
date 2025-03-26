@@ -91,50 +91,54 @@ public class CoursController implements Initializable {
         }
 
         if (txtNom.getText().isEmpty() || txtDescription.getText().isEmpty() ||
-                cmbHeureDebut.getValue() == null || cmbHeureFin.getValue() == null || cmbSalle.getValue() == null) {
+                cmbHeureDebut.getValue() == null || cmbHeureFin.getValue() == null || cmbSalle.getValue() == null || cmbJour.getValue() == null) {
             afficherAlerte("Erreur", "Tous les champs doivent être remplis.");
             return;
         }
 
         if (coursDao.existeCours(txtNom.getText())) {
             afficherAlerte("Erreur", "Un cours avec ce nom existe déjà.");
-        } else {
-            Cours newCours = Cours.builder()
-                    .nom(txtNom.getText().substring(0, 1).toUpperCase() + txtNom.getText().substring(1).toLowerCase())
-                    .description(txtDescription.getText())
-                    .heureDebut(cmbHeureDebut.getValue())
-                    .heureFin(cmbHeureFin.getValue())
-                    .salle(cmbSalle.getValue())
-                    .jour(cmbJour.getValue())
-                    .professeur(comboProfesseur.getValue())
-                    .build();
-
-            coursDao.addCours(newCours);
-
-            // Envoi de l’e-mail au professeur concerné
-            String emailProfesseur = newCours.getProfesseur().getEmail();
-            String sujet = "Nouveau cours ajouté : " + newCours.getNom();
-            String message = "Bonjour " + newCours.getProfesseur().getNom() + ",\n\n" +
-                    "Un nouveau cours a été ajouté : " + newCours.getNom() + ".\n" +
-                    "Description : " + newCours.getDescription() + "\n" +
-                    "Date : " + newCours.getJour() + "\n" +
-                    "Horaire : " + newCours.getHeureDebut() + " - " + newCours.getHeureFin() + "\n" +
-                    "Salle : " + newCours.getSalle().getLibelle() + "\n\n" +
-                    "Merci de votre engagement.\nCordialement.";
-
-            EmailService.envoyerEmail(emailProfesseur, sujet, message);
-
-            loadTableData();
-            txtNom.clear();
-            txtDescription.clear();
-            cmbHeureDebut.setValue(null);
-            cmbHeureFin.setValue(null);
-            cmbSalle.setValue(null);
-            cmbJour.setValue(null);
-            comboProfesseur.setValue(null);
+            return;
         }
-    }
+        int salleId = cmbSalle.getValue().getId();
+        if (coursDao.existeChevauchement(salleId, cmbHeureDebut.getValue(), cmbHeureFin.getValue(), cmbJour.getValue())) {
+            afficherAlerte("Erreur", "Un autre cours est déjà prévu dans cette salle sur ce créneau horaire.");
+            return;
+        }
 
+        Cours newCours = Cours.builder()
+                .nom(txtNom.getText().substring(0, 1).toUpperCase() + txtNom.getText().substring(1).toLowerCase())
+                .description(txtDescription.getText())
+                .heureDebut(cmbHeureDebut.getValue())
+                .heureFin(cmbHeureFin.getValue())
+                .salle(cmbSalle.getValue())
+                .jour(cmbJour.getValue())
+                .professeur(comboProfesseur.getValue())
+                .build();
+
+        coursDao.addCours(newCours);
+
+        String emailProfesseur = newCours.getProfesseur().getEmail();
+        String sujet = "Nouveau cours ajouté : " + newCours.getNom();
+        String message = "Bonjour " + newCours.getProfesseur().getNom() + ",\n\n" +
+                "Un nouveau cours a été ajouté : " + newCours.getNom() + ".\n" +
+                "Description : " + newCours.getDescription() + "\n" +
+                "Date : " + newCours.getJour() + "\n" +
+                "Horaire : " + newCours.getHeureDebut() + " - " + newCours.getHeureFin() + "\n" +
+                "Salle : " + newCours.getSalle().getLibelle() + "\n\n" +
+                "Merci de votre engagement.\nCordialement.";
+
+        EmailService.envoyerEmail(emailProfesseur, sujet, message);
+        afficherAlerte("Succès", "Le cours a été ajouté avec succès.");
+        loadTableData();
+        txtNom.clear();
+        txtDescription.clear();
+        cmbHeureDebut.setValue(null);
+        cmbHeureFin.setValue(null);
+        cmbSalle.setValue(null);
+        cmbJour.setValue(null);
+        comboProfesseur.setValue(null);
+    }
 
     @FXML
     void deleteCours(ActionEvent event) {
@@ -142,9 +146,17 @@ public class CoursController implements Initializable {
         if (selectedCours != null) {
             coursDao.deleteCours(selectedCours.getId());
            loadTableData();
+            afficherAlerte("Succès", "Le cours a été supprimé avec succès.");
         } else {
             afficherAlerte("Erreur", "Sélectionnez un cours à supprimer.");
         }
+        txtNom.clear();
+        txtDescription.clear();
+        cmbHeureDebut.setValue(null);
+        cmbHeureFin.setValue(null);
+        cmbSalle.setValue(null);
+        cmbJour.setValue(null);
+        comboProfesseur.setValue(null);
     }
 
     @FXML
@@ -159,15 +171,38 @@ public class CoursController implements Initializable {
             return;
         }
 
+        int salleId = cmbSalle.getValue().getId();
+        String jour = cmbJour.getValue();
+        LocalTime heureDebut = cmbHeureDebut.getValue();
+        LocalTime heureFin = cmbHeureFin.getValue();
 
+
+        if (coursDao.existeChevauchementModification(selectedCours.getId(), salleId, heureDebut, heureFin, jour)) {
+            afficherAlerte("Erreur", "Un autre cours est déjà prévu dans cette salle sur ce créneau horaire.");
+            return;
+        }
         selectedCours.setNom(txtNom.getText().substring(0, 1).toUpperCase() + txtNom.getText().substring(1).toLowerCase());
         selectedCours.setDescription(txtDescription.getText());
         selectedCours.setHeureDebut(cmbHeureDebut.getValue());
         selectedCours.setHeureFin(cmbHeureFin.getValue());
         selectedCours.setSalle(cmbSalle.getValue());
+        selectedCours.setJour(cmbJour.getValue());
         selectedCours.setProfesseur(comboProfesseur.getValue());
 
         coursDao.updateCours(selectedCours);
+        String emailProfesseur = selectedCours.getProfesseur().getEmail();
+        String sujet = "Modification de votre cours : " + selectedCours.getNom();
+        String message = "Bonjour " + selectedCours.getProfesseur().getNom() + ",\n\n" +
+                "Votre cours a été modifié.\n\n" +
+                "Nouveau nom : " + selectedCours.getNom() + "\n" +
+                "Description : " + selectedCours.getDescription() + "\n" +
+                "Jour : " + selectedCours.getJour() + "\n" +
+                "Nouvel horaire : " + selectedCours.getHeureDebut() + " - " + selectedCours.getHeureFin() + "\n" +
+                "Salle : " + selectedCours.getSalle().getLibelle() + "\n\n" +
+                "Merci de votre engagement.\nCordialement.";
+
+        EmailService.envoyerEmail(emailProfesseur, sujet, message);
+        afficherAlerte("Succès", "Le cours a été modifié avec succès.");
         loadTableData();
 
         txtNom.clear();
@@ -175,10 +210,12 @@ public class CoursController implements Initializable {
         cmbHeureDebut.setValue(null);
         cmbHeureFin.setValue(null);
         cmbSalle.setValue(null);
+        cmbJour.setValue(null);
+        comboProfesseur.setValue(null);
     }
 
     private void afficherAlerte(String titre, String message) {
-        Alert alert = new Alert(Alert.AlertType.WARNING);
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle(titre);
         alert.setHeaderText(null);
         alert.setContentText(message);

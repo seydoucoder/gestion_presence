@@ -4,6 +4,8 @@ import com.gestion_presence.gestion_presence.Models.Cours;
 import com.gestion_presence.gestion_presence.utils.JPAUtil;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
+
+import java.time.LocalTime;
 import java.util.List;
 
 public class CoursDao {
@@ -115,4 +117,53 @@ public class CoursDao {
             em.close();
         }
     }
+
+    public static boolean existeChevauchement(int salleId, LocalTime heureDebut, LocalTime heureFin, String jour) {
+        EntityManager em = JPAUtil.getEntityManagerFactory().createEntityManager();
+        try {
+            String query = "SELECT COUNT(c) FROM Cours c WHERE c.salle.id = :salleId AND c.jour = :jour " +
+                    "AND c.id <> :coursId " +
+                    "AND (:heureDebut < c.heureFin AND :heureFin > c.heureDebut)";
+
+            long count = (long) em.createQuery(query)
+                    .setParameter("salleId", salleId)
+                    .setParameter("jour", jour)
+                    .setParameter("heureDebut", heureDebut)
+                    .setParameter("heureFin", heureFin)
+                    .getSingleResult();
+
+            return count > 0;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        } finally {
+            em.close();
+        }
+    }
+    public static boolean existeChevauchementModification(int coursId, int salleId, LocalTime heureDebut, LocalTime heureFin, String jour) {
+        EntityManager em = JPAUtil.getEntityManagerFactory().createEntityManager();
+        try {
+            String query = "SELECT COUNT(c) FROM Cours c WHERE c.salle.id = :salleId AND c.jour = :jour " +
+                    "AND c.id <> :coursId " +
+                    "AND (:heureDebut < c.heureFin AND :heureFin > c.heureDebut)";
+
+            long count = (long) em.createQuery(query)
+                    .setParameter("coursId", coursId)
+                    .setParameter("salleId", salleId)
+                    .setParameter("jour", jour)
+                    .setParameter("heureDebut", heureDebut)
+                    .setParameter("heureFin", heureFin)
+                    .getSingleResult();
+
+            return count > 0;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        } finally {
+            em.close();
+        }
+    }
+
+
+
 }
