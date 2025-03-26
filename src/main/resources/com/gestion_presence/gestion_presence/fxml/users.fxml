@@ -1,49 +1,42 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ComboBox?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.PasswordField?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 
-<AnchorPane xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.gestion_presence.gestion_presence.UsersController">
+<AnchorPane style="-fx-background-color: #f8f9fa;" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.gestion_presence.gestion_presence.UsersController">
+
+    <VBox spacing="20" style="-fx-padding: 20;">
 
 
-    <VBox prefHeight="653.0" prefWidth="974.0" spacing="20" style="-fx-padding: 20;">
-        <children>
-
-            <Label style="-fx-font-size: 20px; -fx-font-weight: bold;" text="Liste des Utilisateurs" />
+        <Label style="-fx-font-size: 22px; -fx-font-weight: bold; -fx-text-fill: #2c1f47;" text="👥 Gestion des Utilisateurs" />
 
 
-            <TableView fx:id="tableUsers">
-                <columns>
-                    <TableColumn fx:id="colId" prefWidth="50" text="ID" />
-                    <TableColumn fx:id="colNom" prefWidth="150" text="Nom" />
-                    <TableColumn fx:id="colPrenom" prefWidth="150" text="Prénom" />
-                    <TableColumn fx:id="colEmail" prefWidth="200" text="Email" />
-                    <TableColumn fx:id="colRole" prefWidth="100" text="Rôle" />
-                </columns>
-            </TableView>
+        <TableView fx:id="tableUsers" style="-fx-background-color: white; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 8, 0, 0, 5);">
+            <columns>
+                <TableColumn fx:id="colId" prefWidth="50" text="ID" />
+                <TableColumn fx:id="colNom" prefWidth="150" text="Nom" />
+                <TableColumn fx:id="colPrenom" prefWidth="150" text="Prénom" />
+                <TableColumn fx:id="colEmail" prefWidth="200" text="Email" />
+                <TableColumn fx:id="colRole" prefWidth="100" text="Role" />
+            </columns>
+        </TableView>
 
 
-            <HBox prefHeight="67.0" prefWidth="943.0" spacing="10">
-                <TextField fx:id="txtNom" promptText="Nom" />
-                <TextField fx:id="txtPrenom" promptText="Prénom" />
-                <TextField fx:id="txtEmail" promptText="Email" />
-                <PasswordField fx:id="txtPassword" promptText="Mot de passe" />
-                <ComboBox fx:id="comboRole" prefWidth="150" promptText="Rôle" />
-            </HBox>
+        <HBox spacing="10" style="-fx-padding: 10;">
+            <TextField fx:id="txtNom" prefWidth="150" promptText="Nom" />
+            <TextField fx:id="txtPrenom" prefWidth="150" promptText="Prénom" />
+            <TextField fx:id="txtEmail" prefWidth="200" promptText="Email" />
+            <PasswordField fx:id="txtPassword" prefWidth="200" promptText="Mot de passe" />
+            <ComboBox fx:id="comboRole" prefWidth="150" promptText="Role" />
+        </HBox>
 
-                  <HBox prefHeight="28.0" prefWidth="893.0" spacing="10">
-                <Button fx:id="btnAjouter" onAction="#addUser" style="-fx-background-color: green; -fx-text-fill: white;" text="Ajouter" />
-                <Button fx:id="btnModifier" onAction="#modifyUser" style="-fx-background-color: blue; -fx-text-fill: white;" text="Modifier" />
-                <Button fx:id="btnSupprimer" onAction="#deleteUser" style="-fx-background-color: red; -fx-text-fill: white;" text="Supprimer" />
-            </HBox>        </children>
+
+        <HBox alignment="CENTER" spacing="10">
+            <Button fx:id="btnAjouter" onAction="#addUser" style="-fx-background-color: #28a745; -fx-text-fill: white; -fx-font-weight: bold; -fx-padding: 8 20;" text="➕ Ajouter" />
+            <Button fx:id="btnModifier" onAction="#modifyUser" style="-fx-background-color: #007bff; -fx-text-fill: white; -fx-font-weight: bold; -fx-padding: 8 20;" text="✏ Modifier" />
+            <Button fx:id="btnSupprimer" onAction="#deleteUser" style="-fx-background-color: #dc3545; -fx-text-fill: white; -fx-font-weight: bold; -fx-padding: 8 20;" text="🗑 Supprimer" />
+        </HBox>
+
     </VBox>
 
 </AnchorPane>

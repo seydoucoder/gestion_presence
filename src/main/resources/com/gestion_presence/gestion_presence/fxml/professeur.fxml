@@ -3,26 +3,32 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="com.gestion_presence.gestion_presence.ProfesseurController">
+<AnchorPane xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.gestion_presence.gestion_presence.ProfesseurController"
+            style="-fx-background-color: #f8f9fa;">
 
-    <!-- Contenu principal -->
     <VBox spacing="20" style="-fx-padding: 20;">
 
-        <!-- Titre -->
-        <Label text="Gestion des Présences" style="-fx-font-size: 20px; -fx-font-weight: bold;" AnchorPane.leftAnchor="20" AnchorPane.topAnchor="20"/>
 
-        <!-- Tableau des cours -->
-        <TableView fx:id="tableCours" AnchorPane.leftAnchor="20" AnchorPane.topAnchor="60" AnchorPane.rightAnchor="20" AnchorPane.bottomAnchor="100">
+        <Label text="📋 Gestion des Présences"
+               style="-fx-font-size: 22px; -fx-font-weight: bold; -fx-text-fill: #2c1f47;"/>
+
+
+        <TableView fx:id="tableCours"
+                   style="-fx-background-color: white; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 8, 0, 0, 5);">
             <columns>
-                <TableColumn fx:id="colNomCours" text="Nom du Cours" />
-                <TableColumn fx:id="colHeureDebut" text="Heure Début" />
-                <TableColumn fx:id="colHeureFin" text="Heure Fin" />
-                <TableColumn fx:id="colJour" text="Jour" />
+                <TableColumn fx:id="colNomCours" text="Nom du Cours" prefWidth="200"/>
+                <TableColumn fx:id="colHeureDebut" text="Heure Début" prefWidth="100"/>
+                <TableColumn fx:id="colHeureFin" text="Heure Fin" prefWidth="100"/>
+                <TableColumn fx:id="colJour" text="Jour" prefWidth="100"/>
             </columns>
         </TableView>
 
-        <!-- Bouton de marquage de présence -->
-        <Button text="Marquer Présence" fx:id="btnEmarger" style="-fx-background-color: #28a745; -fx-text-fill: white;" AnchorPane.leftAnchor="20" AnchorPane.bottomAnchor="20" AnchorPane.rightAnchor="20" />
+
+        <HBox alignment="CENTER">
+            <Button text="✔ Marquer Présence" fx:id="btnEmarger"
+                    style="-fx-background-color: #28a745; -fx-text-fill: white; -fx-font-weight: bold; -fx-padding: 10 20; -fx-border-radius: 5;"/>
+        </HBox>
 
     </VBox>
 

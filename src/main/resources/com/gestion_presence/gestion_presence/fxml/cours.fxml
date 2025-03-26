@@ -10,13 +10,15 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane prefHeight="573.0" prefWidth="991.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.gestion_presence.gestion_presence.CoursController">
+<AnchorPane prefHeight="573.0" prefWidth="991.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.gestion_presence.gestion_presence.CoursController" style="-fx-background-color: #f4f4f4;">
 
     <VBox prefHeight="524.0" prefWidth="1011.0" spacing="20" style="-fx-padding: 20;">
         <children>
-            <Label style="-fx-font-size: 20px; -fx-font-weight: bold;" text="Liste des Cours" />
+            <Label style="-fx-font-size: 22px; -fx-font-weight: bold; -fx-text-fill: #2c1f47;" text="📚 Liste des Cours" />
 
-            <TableView fx:id="tableCours">
+
+            <TableView fx:id="tableCours" style="-fx-background-color: white; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 8, 0, 0, 5);">
                 <columns>
                     <TableColumn fx:id="colId" prefWidth="50" text="ID" />
                     <TableColumn fx:id="colNom" prefWidth="150.0" text="Nom du Cours" />
@@ -25,11 +27,12 @@
                     <TableColumn fx:id="colHeureFin" prefWidth="112.0" text="Heure Fin" />
                     <TableColumn fx:id="colSalle" prefWidth="76.0" text="Salle" />
                     <TableColumn fx:id="colJour" prefWidth="79.0" text="Jour" />
-               <TableColumn fx:id="colProf" prefWidth="170.0" text="Professeur" />
+                    <TableColumn fx:id="colProf" prefWidth="170.0" text="Professeur" />
                 </columns>
             </TableView>
 
-            <HBox spacing="10">
+
+            <HBox spacing="10" style="-fx-padding: 10; -fx-background-color: white; -fx-border-radius: 5; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 8, 0, 0, 5);">
                 <TextField fx:id="txtNom" prefWidth="150" promptText="Nom du cours" />
                 <TextField fx:id="txtDescription" prefWidth="200" promptText="Description" />
                 <ComboBox fx:id="comboProfesseur" prefWidth="200" promptText="Sélectionner Professeur" />
@@ -38,11 +41,17 @@
                 <ComboBox fx:id="cmbSalle" prefWidth="150" promptText="Salle" />
                 <ComboBox fx:id="cmbJour" prefWidth="120" promptText="Jour" />
             </HBox>
+
+
+            <HBox spacing="15" alignment="CENTER">
+                <Button fx:id="btnAjouter" onAction="#addCours" text="Ajouter"
+                        style="-fx-background-color: #28a745; -fx-text-fill: white; -fx-font-weight: bold; -fx-padding: 10 20;"/>
+                <Button fx:id="btnModifier" onAction="#modifCours" text="Modifier"
+                        style="-fx-background-color: #ffc107; -fx-text-fill: black; -fx-font-weight: bold; -fx-padding: 10 20;"/>
+                <Button fx:id="btnSupprimer" onAction="#deleteCours" text="Supprimer"
+                        style="-fx-background-color: #dc3545; -fx-text-fill: white; -fx-font-weight: bold; -fx-padding: 10 20;"/>
+            </HBox>
         </children>
     </VBox>
-
-       <Button fx:id="btnAjouter" layoutX="394.0" layoutY="524.0" onAction="#addCours" style="-fx-background-color: green; -fx-text-fill: white;" text="Ajouter" />
-       <Button fx:id="btnModifier" layoutX="481.0" layoutY="524.0" onAction="#modifCours" style="-fx-background-color: orange; -fx-text-fill: white;" text="Modifier" />
-       <Button fx:id="btnSupprimer" layoutX="576.0" layoutY="524.0" onAction="#deleteCours" style="-fx-background-color: red; -fx-text-fill: white;" text="Supprimer" />
 
 </AnchorPane>

@@ -32,10 +32,7 @@ public class EmargementController implements Initializable {
     @FXML private TableColumn<Emargements, String> colProfesseur;
     @FXML private TableColumn<Emargements, String> colCours;
 
-    @FXML private DatePicker datePicker;
-    @FXML private ComboBox<String> comboStatut;
-    @FXML private ComboBox<User> comboProfesseur;
-    @FXML private ComboBox<Cours> comboCours;
+
 
     @FXML private Button btnAjouter;
     @FXML private Button btnModifier;
@@ -51,30 +48,29 @@ public class EmargementController implements Initializable {
     @FXML
     private DatePicker datePickerFin;
     @FXML
-    private void handleFiltrerParDate(ActionEvent event) {
+    private void chargerFiltrerParDate(ActionEvent event) {
         LocalDate dateDebut = datePickerDebut.getValue();
         LocalDate dateFin = datePickerFin.getValue();
 
         if (dateDebut != null && dateFin != null) {
-            // Convertir LocalDate en Date (java.util.Date)
+
             Date dateDebutJava = java.sql.Date.valueOf(dateDebut);
             Date dateFinJava = java.sql.Date.valueOf(dateFin);
 
-            // Récupérer les émargements filtrés
+
             List<Emargements> emargementsFiltrés = emargementsDao.getEmargementsBetweenDates(dateDebutJava, dateFinJava);
 
-            // Mettre à jour la TableView avec les résultats filtrés
+
             tableEmargements.getItems().setAll(emargementsFiltrés);
         }
     }
 
-    UserDao userDao = new UserDao();
-    CoursDao coursDao = new CoursDao();
+
     EmargementsDao emargementsDao = new EmargementsDao();
     private ExportService exportService = new ExportService();
 
     @FXML
-    void handleExportPDF(ActionEvent event) {
+    void chargerExportPDF(ActionEvent event) {
 
         List<Emargements> emargements = new ArrayList<>(tableEmargements.getItems());
 
@@ -94,7 +90,7 @@ public class EmargementController implements Initializable {
 
 
     @FXML
-    void handleExportExcel(ActionEvent event) {
+    void chargerExportExcel(ActionEvent event) {
 
         List<Emargements> emargements = new ArrayList<>(tableEmargements.getItems());
 
@@ -113,17 +109,7 @@ public class EmargementController implements Initializable {
     }
 
 
-    private void chargerProfs() {
-        List<User> profs = userDao.getUsersByProfs();
-        ObservableList<User> profList = FXCollections.observableArrayList(profs);
-        comboProfesseur.setItems(profList);
 
-    }
-    private void chargerCours() {
-        List<Cours> cours = coursDao.getAllCours();
-        ObservableList<Cours> coursList = FXCollections.observableArrayList(cours);
-        comboCours.setItems(coursList);
-    }
     private void loadTableData() {
         List<Emargements> emarges = emargementsDao.getAllEmargements();
         ObservableList<Emargements> emargesList = FXCollections.observableArrayList(emarges);
@@ -137,23 +123,7 @@ public class EmargementController implements Initializable {
         alert.showAndWait();
     }
 
-    @FXML
-    void addEmarge(ActionEvent event) {
-        Emargements newEmarge = Emargements.builder()
-                .date(java.sql.Date.valueOf(datePicker.getValue()))
-                .statut(comboStatut.getValue())
-                .professeur(comboProfesseur.getValue())
-                .cours(comboCours.getValue())
-                .build();
 
-        emargementsDao.addEmargement(newEmarge);
-        loadTableData();
-        afficherAlerte("Succès", "Emargement reussi");
-        datePicker.setValue(null);
-        comboStatut.setValue(null);
-        comboProfesseur.setValue(null);
-        comboCours.setValue(null);
-    }
 
     @FXML
     void deleteEmarge(ActionEvent event) {
@@ -167,10 +137,6 @@ public class EmargementController implements Initializable {
         }
     }
 
-    @FXML
-    void modifEmarge(ActionEvent event) {
-
-    }
 
 
 
@@ -180,37 +146,21 @@ public class EmargementController implements Initializable {
 
 
 
-        btnFiltrerDates.setOnAction(event -> handleFiltrerParDate(event));
+        btnFiltrerDates.setOnAction(event -> chargerFiltrerParDate(event));
         if (btnExportPDF != null) {
-            btnExportPDF.setOnAction(this::handleExportPDF);
+            btnExportPDF.setOnAction(this::chargerExportPDF);
         }
         if (btnExportExcel != null) {
-            btnExportExcel.setOnAction(this::handleExportExcel);
+            btnExportExcel.setOnAction(this::chargerExportExcel);
         }
         colId.setCellValueFactory(new PropertyValueFactory<>("id"));
         colDate.setCellValueFactory(new PropertyValueFactory<>("date"));
         colStatut.setCellValueFactory(new PropertyValueFactory<>("statut"));
         colProfesseur.setCellValueFactory(new PropertyValueFactory<>("professeur"));
         colCours.setCellValueFactory(new PropertyValueFactory<>("cours"));
-        tableEmargements.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
-            if (newValue != null) {
 
-                comboStatut.setValue(newValue.getStatut());
-                comboProfesseur.setValue(newValue.getProfesseur());
-                comboCours.setValue(newValue.getCours());
-
-                btnAjouter.setDisable(true);
-                btnModifier.setDisable(false);
-                btnSupprimer.setDisable(false);
-            }else{
-                btnAjouter.setDisable(false);
-                btnSupprimer.setDisable(true);
-                btnModifier.setDisable(true);
-            }
-        });
 
         loadTableData();
-        chargerCours();
-        chargerProfs();
+
     }
 }

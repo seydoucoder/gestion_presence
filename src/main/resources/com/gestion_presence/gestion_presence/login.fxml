@@ -7,17 +7,26 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox alignment="CENTER" prefHeight="443.0" prefWidth="902.0" spacing="10" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.gestion_presence.gestion_presence.LoginController">
-   <AnchorPane prefHeight="452.0" prefWidth="915.0">
-      <children>
-      
-          <TextField fx:id="txtUsername" layoutX="320.0" layoutY="140.0" prefHeight="46.0" prefWidth="244.0" promptText="Nom d'utilisateur" style="-fx-pref-height: 40px; -fx-border-color: #7B1FA2; -fx-border-radius: 5; -fx-background-radius: 5; -fx-font-size: 14px;" />
-      
-          <PasswordField fx:id="txtPassword" layoutX="320.0" layoutY="209.0" prefWidth="233.0" promptText="Mot de passe" style="-fx-pref-height: 40px; -fx-border-color: #7B1FA2; -fx-border-radius: 5; -fx-background-radius: 5; -fx-font-size: 14px;" />
-      
-          <Button fx:id="btnLogin" layoutX="352.0" layoutY="285.0" style="-fx-background-color: #7B1FA2; -fx-text-fill: white; -fx-font-size: 16px; -fx-pref-height: 40px; -fx-background-radius: 5; -fx-border-radius: 5;" text="Se connecter" />
-      
-          <Label layoutX="396.0" layoutY="93.0" style="-fx-font-size: 22px; -fx-text-fill: #4A148C; -fx-font-weight: bold;" text="Connexion" />
-      </children>
-   </AnchorPane>
+<VBox alignment="CENTER" prefHeight="443.0" prefWidth="902.0" spacing="20" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.gestion_presence.gestion_presence.LoginController">
+
+    <AnchorPane prefHeight="452.0" prefWidth="915.0" style="-fx-background-color: #f4f4f9; -fx-padding: 40px;">
+        <children>
+
+
+            <Label layoutX="320.0" layoutY="93.0" style="-fx-font-size: 22px; -fx-text-fill: #7B1FA2; -fx-font-weight: bold;" text="Connexion" />
+
+
+            <TextField fx:id="txtUsername" layoutX="320.0" layoutY="140.0" prefHeight="46.0" prefWidth="244.0"
+                       promptText="Nom d'utilisateur" style="-fx-pref-height: 40px; -fx-border-color: #7B1FA2; -fx-border-radius: 5; -fx-background-radius: 5; -fx-font-size: 14px;" />
+
+
+            <PasswordField fx:id="txtPassword" layoutX="320.0" layoutY="209.0" prefWidth="233.0"
+                           promptText="Mot de passe" style="-fx-pref-height: 40px; -fx-border-color: #7B1FA2; -fx-border-radius: 5; -fx-background-radius: 5; -fx-font-size: 14px;" />
+
+
+            <Button fx:id="btnLogin" layoutX="352.0" layoutY="285.0" style="-fx-background-color: #7B1FA2; -fx-text-fill: white; -fx-font-size: 16px; -fx-pref-height: 40px; -fx-background-radius: 5; -fx-border-radius: 5;" text="Se connecter" />
+
+        </children>
+    </AnchorPane>
+
 </VBox>

@@ -11,6 +11,8 @@ module com.gestion_presence.gestion_presence {
     requires layout;
 
     requires jxl;
+
+
     opens com.gestion_presence.gestion_presence.Models to org.hibernate.orm.core, javafx.base;
 
     opens com.gestion_presence.gestion_presence.utils;

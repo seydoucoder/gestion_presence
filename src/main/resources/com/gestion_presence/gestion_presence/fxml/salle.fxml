@@ -9,16 +9,17 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.gestion_presence.gestion_presence.SalleController">
-
+<AnchorPane xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.gestion_presence.gestion_presence.SalleController"
+            style="-fx-background-color: #f8f9fa;">
 
     <VBox prefWidth="952" spacing="20" style="-fx-padding: 20;">
         <children>
 
-            <Label style="-fx-font-size: 20px; -fx-font-weight: bold;" text="Liste des Salles" />
+            <Label style="-fx-font-size: 22px; -fx-font-weight: bold; -fx-text-fill: #2c1f47;" text="🏫 Liste des Salles" />
 
 
-            <TableView fx:id="tableSalles">
+            <TableView fx:id="tableSalles" style="-fx-background-color: white; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 8, 0, 0, 5);">
                 <columns>
                     <TableColumn fx:id="colId" prefWidth="50" text="ID" />
                     <TableColumn fx:id="colLibelle" prefWidth="400" text="Libellé de la Salle" />
@@ -26,13 +27,20 @@
             </TableView>
 
 
-            <HBox spacing="10">
+            <HBox spacing="10" style="-fx-padding: 10; -fx-background-color: white; -fx-border-radius: 5; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 8, 0, 0, 5);">
                 <TextField fx:id="txtLibelle" prefWidth="400" promptText="Libellé de la Salle" />
-
-                <Button fx:id="btnAjouter" onAction="#addSalle" style="-fx-background-color: green; -fx-text-fill: white;" text="Ajouter" />
-                <Button fx:id="btnModifier" onAction="#modifSalle" style="-fx-background-color: orange; -fx-text-fill: white;" text="Modifier" />
-                <Button fx:id="btnSupprimer" onAction="#deleteSalle" style="-fx-background-color: red; -fx-text-fill: white;" text="Supprimer" />
             </HBox>
+
+
+            <HBox spacing="15" alignment="CENTER">
+                <Button fx:id="btnAjouter" onAction="#addSalle" text="Ajouter"
+                        style="-fx-background-color: #28a745; -fx-text-fill: white; -fx-font-weight: bold; -fx-padding: 10 20;"/>
+                <Button fx:id="btnModifier" onAction="#modifSalle" text="Modifier"
+                        style="-fx-background-color: #ffc107; -fx-text-fill: black; -fx-font-weight: bold; -fx-padding: 10 20;"/>
+                <Button fx:id="btnSupprimer" onAction="#deleteSalle" text="Supprimer"
+                        style="-fx-background-color: #dc3545; -fx-text-fill: white; -fx-font-weight: bold; -fx-padding: 10 20;"/>
+            </HBox>
+
         </children>
     </VBox>
 

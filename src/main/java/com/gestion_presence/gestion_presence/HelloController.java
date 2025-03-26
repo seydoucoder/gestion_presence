@@ -13,7 +13,6 @@ import java.io.IOException;
 import javafx.event.ActionEvent;
 import javafx.stage.Stage;
 
-
 public class HelloController {
     @FXML
     private Button btnDash;
@@ -24,8 +23,7 @@ public class HelloController {
     @FXML
     private Button btnEmerge;
 
-    @FXML
-    private Button btnNotif;
+
 
     @FXML
     private Button btnSalle;
@@ -102,7 +100,7 @@ public class HelloController {
         btnSalle.setStyle("-fx-background-color: #3f2b63; -fx-text-fill: white;");
         btnCours.setStyle("-fx-background-color: #3f2b63; -fx-text-fill: white;");
         btnEmerge.setStyle("-fx-background-color: #3f2b63; -fx-text-fill: white;");
-        btnNotif.setStyle("-fx-background-color: #3f2b63; -fx-text-fill: white;");
+
         btnUser.setStyle("-fx-background-color: #3f2b63; -fx-text-fill: white;");
         btnProf.setStyle("-fx-background-color: #3f2b63; -fx-text-fill: white;");
 
@@ -114,6 +112,7 @@ public class HelloController {
 
     @FXML
     private void initialize() {
+
         loadCurrentUser();
         loadPage("fxml/dashboard.fxml");
         setActiveButton(btnDash);
@@ -139,10 +138,7 @@ public class HelloController {
             setActiveButton(btnEmerge);
         });
 
-        btnNotif.setOnAction(e -> {
-            loadPage("fxml/notification.fxml");
-            setActiveButton(btnNotif);
-        });
+
 
         btnUser.setOnAction(e -> {
             loadPage("fxml/users.fxml");

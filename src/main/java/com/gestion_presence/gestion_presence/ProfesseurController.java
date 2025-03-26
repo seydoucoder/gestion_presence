@@ -117,10 +117,10 @@ public class ProfesseurController {
             LocalTime heureDebut = selectedCours.getHeureDebut();
             LocalTime heureFin = selectedCours.getHeureFin();
             LocalTime limiteEmargement = heureDebut.plusMinutes(15);
-//            if (now.isBefore(heureDebut) || now.isAfter(heureFin)) {
-//                showAlert("Emargement refusé", "Vous ne pouvez émarger qu'entre " + heureDebut + " et " + heureFin + ".");
-//                return;
-//            }
+            if (now.isBefore(heureDebut)) {
+                showAlert("Emargement refusé", "Vous  pouvez émarger a partir de " + heureDebut);
+                return;
+            }
 
             if (now.isAfter(limiteEmargement)) {
                 showAlert("Emargement refusé", "Vous avez dépassé le délai d’émargement de 15 minutes !");

@@ -8,13 +8,16 @@
 <?import javafx.scene.chart.NumberAxis?>
 <?import javafx.scene.control.Label?>
 
-<AnchorPane xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.gestion_presence.gestion_presence.DashboardController" prefWidth="1000.0" prefHeight="600.0">
+<AnchorPane xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.gestion_presence.gestion_presence.DashboardController"
+            prefWidth="1000.0" prefHeight="600.0" style="-fx-background-color: #f4f4f4;">
 
 
-    <Label text="Tableau de Bord" layoutX="400.0" layoutY="20.0" style="-fx-font-size: 24px; -fx-font-weight: bold;"/>
+    <Label text="Tableau de Bord" layoutX="400.0" layoutY="20.0"
+           style="-fx-font-size: 26px; -fx-font-weight: bold; -fx-text-fill: #2c1f47;"/>
 
 
-    <BarChart fx:id="barChartProfesseurs" layoutX="50.0" layoutY="70.0" prefWidth="400.0" prefHeight="300.0">
+    <BarChart fx:id="barChartProfesseurs" layoutX="50.0" layoutY="70.0" prefWidth="400.0" prefHeight="300.0"
+              style="-fx-background-color: white; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 10, 0, 0, 5);">
         <xAxis>
             <CategoryAxis fx:id="xAxisProf" label="Professeurs"/>
         </xAxis>
@@ -24,7 +27,8 @@
     </BarChart>
 
 
-    <LineChart fx:id="lineChartEmargements" layoutX="500.0" layoutY="70.0" prefWidth="450.0" prefHeight="300.0">
+    <LineChart fx:id="lineChartEmargements" layoutX="500.0" layoutY="70.0" prefWidth="450.0" prefHeight="300.0"
+               style="-fx-background-color: white; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 10, 0, 0, 5);">
         <xAxis>
             <CategoryAxis fx:id="xAxisDate" label="Période"/>
         </xAxis>
@@ -34,6 +38,7 @@
     </LineChart>
 
 
-    <PieChart fx:id="pieChartCours" layoutX="300.0" layoutY="380.0" prefWidth="400.0" prefHeight="200.0"/>
+    <PieChart fx:id="pieChartCours" layoutX="300.0" layoutY="400.0" prefWidth="400.0" prefHeight="200.0"
+              style="-fx-background-color: white; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 10, 0, 0, 5);"/>
 
 </AnchorPane>
