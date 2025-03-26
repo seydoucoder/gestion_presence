@@ -1,14 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.Pane?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
+<?import de.jensd.fx.glyphs.fontawesome.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<BorderPane prefHeight="650.0" prefWidth="1250.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.gestion_presence.gestion_presence.HelloController">
+<BorderPane prefHeight="650.0" prefWidth="1250.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.gestion_presence.gestion_presence.HelloController">
 
     <left>
         <VBox prefHeight="670.0" prefWidth="230.0" style="-fx-background-color: #2c1f47; -fx-padding: 20;">
@@ -20,40 +17,46 @@
                                 <Font name="Segoe UI Bold" size="20.0" />
                             </font>
                         </Label>
-                        <Button fx:id="btnLogout" layoutX="60.0" layoutY="10.0" onAction="#logout" text="Déconnexion"
-                                style="-fx-background-color: #d9534f; -fx-text-fill: white; -fx-background-radius: 20; -fx-padding: 8 16;">
+                        <Button fx:id="btnLogout" layoutX="60.0" layoutY="10.0" onAction="#logout" style="-fx-background-color: #d9534f; -fx-text-fill: white; -fx-background-radius: 20; -fx-padding: 8 16;" text="Déconnexion">
                         </Button>
                     </children>
                 </Pane>
-                <Button fx:id="btnDash" mnemonicParsing="false" prefHeight="46.0" prefWidth="220.0"
-                        style="-fx-background-color: transparent; -fx-text-fill: white; -fx-font-size: 14px; -fx-background-radius: 10;"
+                <Button fx:id="btnDash" graphicTextGap="6.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="182.0" style="-fx-background-color: transparent; -fx-text-fill: white; -fx-font-size: 14px; -fx-background-radius: 10;" text="Dashboard">
+                    <graphic>
+                        <FontAwesomeIconView glyphName="DASHBOARD" size="15" />
+                    </graphic>
+                </Button>
 
-                        text="Dashboard" />
+                <Button fx:id="btnSalle" graphicTextGap="6.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="145.0" style="-fx-background-color: transparent; -fx-text-fill: white; -fx-font-size: 14px; -fx-background-radius: 10;" text="Salles">
+                    <graphic>
+                        <FontAwesomeIconView glyphName="BUILDING" size="15" />
+                    </graphic>
+                </Button>
 
-                <Button fx:id="btnSalle" mnemonicParsing="false" prefHeight="46.0" prefWidth="220.0"
-                        style="-fx-background-color: transparent; -fx-text-fill: white; -fx-font-size: 14px; -fx-background-radius: 10;"
+                <Button fx:id="btnCours" graphicTextGap="6.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="146.0" style="-fx-background-color: transparent; -fx-text-fill: white; -fx-font-size: 14px; -fx-background-radius: 10;" text="Cours">
+                    <graphic>
+                        <FontAwesomeIconView glyphName="BOOK" size="15" />
+                    </graphic>
+                </Button>
 
-                        text="Salles" />
+                <Button fx:id="btnEmerge" graphicTextGap="6.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="220.0" style="-fx-background-color: transparent; -fx-text-fill: white; -fx-font-size: 14px; -fx-background-radius: 10;" text="Émargements">
+                    <graphic>
+                        <FontAwesomeIconView glyphName="CHECK_SQUARE" size="15" />
+                    </graphic>
+                </Button>
 
-                <Button fx:id="btnCours" mnemonicParsing="false" prefHeight="46.0" prefWidth="220.0"
-                        style="-fx-background-color: transparent; -fx-text-fill: white; -fx-font-size: 14px; -fx-background-radius: 10;"
+                <Button fx:id="btnUser" graphicTextGap="6.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="175.0" style="-fx-background-color: transparent; -fx-text-fill: white; -fx-font-size: 14px; -fx-background-radius: 10;" text="Utilisateurs">
+                    <graphic>
+                        <FontAwesomeIconView glyphName="USERS" size="15" />
+                    </graphic>
+                </Button>
 
-                        text="Cours" />
+                <Button fx:id="btnProf" graphicTextGap="6.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="177.0" style="-fx-background-color: transparent; -fx-text-fill: white; -fx-font-size: 14px; -fx-background-radius: 10;" text="Professeurs">
+                    <graphic>
+                        <FontAwesomeIconView glyphName="EDIT" size="15" />
+                    </graphic>
+                </Button>
 
-                <Button fx:id="btnEmerge" mnemonicParsing="false" prefHeight="46.0" prefWidth="220.0"
-                        style="-fx-background-color: transparent; -fx-text-fill: white; -fx-font-size: 14px; -fx-background-radius: 10;"
-
-                        text="Émargements" />
-
-                <Button fx:id="btnUser" mnemonicParsing="false" prefHeight="46.0" prefWidth="220.0"
-                        style="-fx-background-color: transparent; -fx-text-fill: white; -fx-font-size: 14px; -fx-background-radius: 10;"
-
-                        text="Utilisateurs" />
-
-                <Button fx:id="btnProf" mnemonicParsing="false" prefHeight="46.0" prefWidth="220.0"
-                        style="-fx-background-color: transparent; -fx-text-fill: white; -fx-font-size: 14px; -fx-background-radius: 10;"
-
-                        text="Emerge" />
             </children>
         </VBox>
     </left>

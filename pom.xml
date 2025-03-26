@@ -13,7 +13,12 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <junit.version>5.10.2</junit.version>
     </properties>
-
+    <repositories>
+        <repository>
+            <id>jitpack.io</id>
+            <url>https://jitpack.io</url>
+        </repository>
+    </repositories>
     <dependencies>
         <!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
         <dependency>
@@ -41,26 +46,15 @@
             <version>2.6.12</version>
         </dependency>
 
-        <!-- Ikonli Core -->
+        <!-- https://mvnrepository.com/artifact/de.jensd/fontawesomefx-fontawesome -->
         <dependency>
-            <groupId>org.kordamp.ikonli</groupId>
-            <artifactId>ikonli-core</artifactId>
-            <version>12.3.1</version>
+            <groupId>de.jensd</groupId>
+            <artifactId>fontawesomefx-fontawesome</artifactId>
+            <version>4.7.0-9.1.2</version>
         </dependency>
 
-        <!-- Ikonli JavaFX -->
-        <dependency>
-            <groupId>org.kordamp.ikonli</groupId>
-            <artifactId>ikonli-javafx</artifactId>
-            <version>12.3.1</version>
-        </dependency>
 
-        <!-- Ikonli FontAwesome 5 -->
-        <dependency>
-            <groupId>org.kordamp.ikonli</groupId>
-            <artifactId>ikonli-fontawesome5-pack</artifactId>
-            <version>12.3.1</version>
-        </dependency>
+
 
         <!-- https://mvnrepository.com/artifact/org.postgresql/postgresql -->
         <dependency>
