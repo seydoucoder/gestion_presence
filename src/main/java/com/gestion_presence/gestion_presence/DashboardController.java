@@ -4,6 +4,8 @@ import com.gestion_presence.gestion_presence.Dao.EmargementsDao;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.chart.*;
+import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
 
 import java.net.URL;
 import java.util.Map;
@@ -17,7 +19,10 @@ public class DashboardController implements Initializable {
 
     @FXML
     private LineChart<String, Number> lineChartEmargements;
-
+    @FXML
+    private Label lblTotalProfs;
+    @FXML
+    private Label lblTotalCours;
     @FXML
     private PieChart pieChartCours;
 
@@ -65,10 +70,29 @@ public class DashboardController implements Initializable {
         }
     }
 
+
+
+
+    private void loadStatCards() {
+        // Load total professors
+        int totalProfs = emargementsDao.getTotalProfesseurs();
+        lblTotalProfs.setText(String.valueOf(totalProfs));
+
+     
+
+        // Load total courses
+        int totalCours = emargementsDao.getTotalCours();
+        lblTotalCours.setText(String.valueOf(totalCours));
+    }
+
+
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        loadStatCards();
         loadProfesseursStats();
         loadEvolutionStats();
         loadPresenceParCoursStats();
+       
     }
 }

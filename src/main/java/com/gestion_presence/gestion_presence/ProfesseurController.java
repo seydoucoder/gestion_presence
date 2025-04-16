@@ -95,13 +95,11 @@ public class ProfesseurController {
             return;
         }
 
-
         Emargements existingEmargement = emargementDao.getEmargementProf(selectedCours, professeur, Date.valueOf(LocalDate.now()));
         if (existingEmargement != null) {
             showAlert("Emargement déjà effectué", "Vous avez déjà émargé pour ce cours aujourd'hui.");
             return;
         }
-
 
         String jourCours = selectedCours.getJour();
         String jourActuel = recupDate(LocalDate.now().getDayOfWeek().toString());
@@ -111,29 +109,33 @@ public class ProfesseurController {
             return;
         }
 
-
         try {
             LocalTime now = LocalTime.now();
             LocalTime heureDebut = selectedCours.getHeureDebut();
             LocalTime heureFin = selectedCours.getHeureFin();
             LocalTime limiteEmargement = heureDebut.plusMinutes(15);
+
+            Emargements emargement = new Emargements();
+            emargement.setProfesseur(professeur);
+            emargement.setCours(selectedCours);
+            emargement.setDate(Date.valueOf(LocalDate.now()));
+
             if (now.isBefore(heureDebut)) {
-                showAlert("Emargement refusé", "Vous  pouvez émarger a partir de " + heureDebut);
+                showAlert("Emargement refusé", "Vous pouvez émarger à partir de " + heureDebut);
                 return;
             }
 
             if (now.isAfter(limiteEmargement)) {
-                showAlert("Emargement refusé", "Vous avez dépassé le délai d’émargement de 15 minutes !");
+                emargement.setStatut("Absent");
+                emargementDao.addEmargement(emargement);
+                showAlert("Retard", "Vous êtes marqué comme absent car vous avez dépassé le délai d'émargement de 15 minutes.");
                 return;
             }
-            Emargements emargement = new Emargements();
-            emargement.setProfesseur(professeur);
-            emargement.setCours(selectedCours);
-            emargement.setStatut("Present");
-            emargement.setDate(Date.valueOf(LocalDate.now()));
 
+            emargement.setStatut("Present");
             emargementDao.addEmargement(emargement);
             showAlert("Succès", "Présence enregistrée avec succès !");
+            
         } catch (Exception e) {
             e.printStackTrace();
             showAlert("Erreur", "Une erreur est survenue lors de l'émargement.");

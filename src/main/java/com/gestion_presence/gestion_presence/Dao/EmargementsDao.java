@@ -13,7 +13,8 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-
+ import java.time.LocalDate;
+    import java.util.ArrayList;
 public class EmargementsDao {
 
     public void addEmargement(Emargements emargement) {
@@ -158,7 +159,29 @@ public class EmargementsDao {
             em.close();
         }
     }
+    public int getTotalProfesseurs() {
+        EntityManager em = JPAUtil.getEntityManagerFactory().createEntityManager();
+        try {
+            String query = "SELECT COUNT(u) FROM User u WHERE u.role.id = 4";
+            return em.createQuery(query, Long.class).getSingleResult().intValue();
+        } finally {
+            em.close();
+        }
+    }
 
+ 
+
+    public int getTotalCours() {
+        EntityManager em = JPAUtil.getEntityManagerFactory().createEntityManager();
+        try {
+            String query = "SELECT COUNT(c) FROM Cours c";
+            return em.createQuery(query, Long.class).getSingleResult().intValue();
+        } finally {
+            em.close();
+        }
+    }
+
+  
 
 
 
